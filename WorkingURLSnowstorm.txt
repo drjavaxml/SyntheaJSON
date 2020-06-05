@@ -1,0 +1,10 @@
+
+
+this works
+
+// https://browser.ihtsdotools.org/snowstorm/snomed-ct/MAIN/2020-03-09/concepts?module=900000000000207008&ecl=%3C%3C%2064572001|Disease|%20:%20(%3C%3C%20363698007|Finding%20site|%20=%20%3C%3C%2039352004|Joint%20structure|,%20116676008|Associated%20morphology|%20=%20112674009|Fibrosis|)
+
+
+and this is the raw ecl
+
+<< 64572001|Disease| : (<< 363698007|Finding site| = << 39352004|Joint structure|, 116676008|Associated morphology| = 112674009|Fibrosis|)
