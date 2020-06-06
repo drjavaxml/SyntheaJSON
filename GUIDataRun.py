@@ -14,15 +14,16 @@ DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\"
 Code1 = '69896004'
 Name1 = "RA"
 # ParseExp= "$..resource[?(@.resourceType == 'Encounter')]..coding..display"
-ParseExp = "$..resource..coding"
+ParseExp = "$"
 
 def myfunc():
     global r
     files = os.listdir(DataDir)
     filecount = 0
+    ParseExp = jsonpath_edit.get()
     for file in files:
         filecount += 1
-        print('---------------------------------------------------------------------------')
+        #print('---------------------------------------------------------------------------')
         if ("json" in file):
             # print("Is it File?" + str(os.path.isfile(DataDir + file)))
             goodfile = (DataDir + file)
@@ -42,8 +43,13 @@ def myfunc():
             path = parse(parseExpression)
 
             results = [match.value for match in path.find(jsonObj)]
+            outstr = ""
             for r in results:
                 print(r)
+                rstr= json.dumps(r)
+                outstr += (rstr + "\n")
+            outstr += ("\n\nnew file ========================================================\n\n")
+            txt_edit.insert(tk.END, outstr)
 
     print("myfunc finished =========================================================")
 
@@ -76,11 +82,23 @@ def save_file():
 
 
 window = tk.Tk()
-window.title("Simple Text Editor")
-window.rowconfigure(0, minsize=800, weight=1)
-window.columnconfigure(1, minsize=800, weight=1)
+window.title("Synthea Data Jsonpath Explorer")
+window.rowconfigure(0, minsize=1, weight=1)
+window.rowconfigure(0, weight=0)
+window.rowconfigure(1, weight=0)
+window.rowconfigure(2, weight=5)
+window.columnconfigure(1, weight=2)
 
+
+
+jsonpath_edit = tk.Entry(window)
+jsonpath_edit.place(height=50)
 txt_edit = tk.Text(window)
+json_label = tk.Label(text="Enter a jsonpath string")
+
+
+
+
 fr_buttons = tk.Frame(window, relief=tk.RAISED, bd=2)
 btn_open = tk.Button(fr_buttons, text="Open", command=open_file)
 btn_save = tk.Button(fr_buttons, text="Save As...", command=save_file)
@@ -90,8 +108,11 @@ btn_open.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 btn_save.grid(row=1, column=0, sticky="ew", padx=5)
 btn_run.grid(row=2, column=0, sticky="ew", padx=5)
 
-fr_buttons.grid(row=0, column=0, sticky="ns")
-txt_edit.grid(row=0, column=1, sticky="nsew")
+fr_buttons.grid(row=2, column=0, sticky="ns")
+json_label.grid(row=0, column=1)
+jsonpath_edit.grid(row=1, column=1, columnspan=4, sticky="ew", padx=5,pady=5)
+txt_edit.grid(row=2, column=1, sticky="nsew", padx=5, pady=5)
+jsonpath_edit.insert('0', "$")
 
 window.mainloop()
 
