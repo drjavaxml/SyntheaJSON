@@ -26,8 +26,6 @@ ParseExp2 = "$..conceptId"
 def clear_all():
     ecl_edit.delete(0, 'end')
     result_edit.delete(1.0, 'end')
-
-
 def send_fhir():
 
     ECL = ecl_edit.get()

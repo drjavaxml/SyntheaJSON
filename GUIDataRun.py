@@ -104,6 +104,7 @@ btn_open = tk.Button(fr_buttons, text="Open", command=open_file)
 btn_save = tk.Button(fr_buttons, text="Save As...", command=save_file)
 btn_run = tk.Button(fr_buttons, text="DataRun", command=myfunc)
 
+
 btn_open.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 btn_save.grid(row=1, column=0, sticky="ew", padx=5)
 btn_run.grid(row=2, column=0, sticky="ew", padx=5)
