@@ -80,6 +80,11 @@ def save_file():
         output_file.write(text)
     window.title(f"Simple Text Editor - {filepath}")
 
+def pick_dir():
+    DataDir = tk.filedialog.askdirectory()
+
+
+
 
 window = tk.Tk()
 window.title("Synthea Data Jsonpath Explorer")
@@ -103,11 +108,13 @@ fr_buttons = tk.Frame(window, relief=tk.RAISED, bd=2)
 btn_open = tk.Button(fr_buttons, text="Open", command=open_file)
 btn_save = tk.Button(fr_buttons, text="Save As...", command=save_file)
 btn_run = tk.Button(fr_buttons, text="DataRun", command=myfunc)
+btn_pic = tk.Button(fr_buttons, text="Pick Data Dir", command=pick_dir)
 
 
 btn_open.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 btn_save.grid(row=1, column=0, sticky="ew", padx=5)
 btn_run.grid(row=2, column=0, sticky="ew", padx=5)
+btn_pic.grid(row=3, column=0, sticky="ew", padx=5)
 
 fr_buttons.grid(row=2, column=0, sticky="ns")
 json_label.grid(row=0, column=1)
