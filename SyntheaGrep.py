@@ -10,19 +10,21 @@ import FHIR_util as fu
 from jsonpath_ng import jsonpath
 from jsonpath_ng.ext import parse
 
+#TODO  Make searches case insensitive
+#TODO  Add the final numbers calculator
+
 DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\"
-Code1 = '69896004'
-Name1 = "RA"
 # ParseExp= "$..resource[?(@.resourceType == 'Encounter')]..coding..display"
 SearchString = "Rheumatoid"
 #cohort_info = []
 cohort_dict = {"0":["0"]}
+
 def data_run():
     txt_edit.delete('1.0', tk.END)
     global r
     files = os.listdir(DataDir)
     filecount = 0
-    SearchString = jsonpath_edit.get()
+    SearchString = search_edit.get()
     for file in files:
         #print('---------------------------------------------------------------------------')
         if ("json" in file):
@@ -95,8 +97,8 @@ window.columnconfigure(1, weight=2)
 
 
 
-jsonpath_edit = tk.Entry(window)
-jsonpath_edit.place(height=50)
+search_edit = tk.Entry(window)
+search_edit.place(height=50)
 txt_edit = tk.Text(window)
 json_label = tk.Label(text="Enter A Search String")
 
@@ -117,9 +119,9 @@ btn_pic.grid(row=3, column=0, sticky="ew", padx=5)
 
 fr_buttons.grid(row=2, column=0, sticky="ns")
 json_label.grid(row=0, column=1)
-jsonpath_edit.grid(row=1, column=1, columnspan=4, sticky="ew", padx=5,pady=5)
+search_edit.grid(row=1, column=1, columnspan=4, sticky="ew", padx=5, pady=5)
 txt_edit.grid(row=2, column=1, sticky="nsew", padx=5, pady=5)
-jsonpath_edit.insert('0', "$")
+search_edit.insert('0', "snomed")
 
 window.mainloop()
 
