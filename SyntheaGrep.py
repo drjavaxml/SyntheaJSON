@@ -4,6 +4,7 @@ import os
 import sys
 import time
 import os
+import re
 import time
 import json
 import FHIR_util as fu
@@ -84,7 +85,24 @@ def save_file():
 def pick_dir():
     DataDir = tk.filedialog.askdirectory()
 
+def count_cohort():
+    txt_edit.delete('1.0', tk.END)
+    cohorts_dict = {}
+    dx_string = search_edit.get()
+    cohorts_dict.update({dx_string: 0})
+    cohort1_mask = re.split('-+', dx_string)
 
+    print(dx_string)
+    for key, dxs in cohort_dict.items():
+        dx_list = dxs
+        res_mask = (set(cohort1_mask) - set(dx_list))
+        if len(res_mask) == 0:
+            count = cohorts_dict.get(dx_string)
+            count += 1
+            cohorts_dict.update({dx_string: count})
+    print(cohorts_dict)
+    co_show = json.dumps(cohorts_dict)
+    txt_edit.insert(tk.END, co_show)
 
 
 window = tk.Tk()
@@ -110,12 +128,13 @@ btn_open = tk.Button(fr_buttons, text="Open", command=open_file)
 btn_save = tk.Button(fr_buttons, text="Save As...", command=save_file)
 btn_run = tk.Button(fr_buttons, text="DataRun", command=data_run)
 btn_pic = tk.Button(fr_buttons, text="Pick Data Dir", command=pick_dir)
-
+btn_calc = tk.Button(fr_buttons, text="Count A Cohort", command=count_cohort)
 
 btn_open.grid(row=0, column=0, sticky="ew", padx=5, pady=5)
 btn_save.grid(row=1, column=0, sticky="ew", padx=5)
 btn_run.grid(row=2, column=0, sticky="ew", padx=5)
 btn_pic.grid(row=3, column=0, sticky="ew", padx=5)
+btn_calc.grid(row=4, column=0, sticky="ew", padx=5)
 
 fr_buttons.grid(row=2, column=0, sticky="ns")
 json_label.grid(row=0, column=1)
