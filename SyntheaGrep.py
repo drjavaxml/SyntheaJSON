@@ -10,7 +10,7 @@ import FHIR_util as fu
 from jsonpath_ng import jsonpath
 from jsonpath_ng.ext import parse
 
-#TODO  Make searches case insensitive
+
 #TODO  Add the final numbers calculator
 
 DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\"
@@ -35,14 +35,14 @@ def data_run():
             opfile = open(goodfile, mode='r')
             flstring = opfile.read()
             outstr = ""
-            if (flstring.find(SearchString) != -1):
+            if (flstring.lower().find(SearchString.lower()) != -1):
                 list = cohort_dict.get(filecount_str)
                 if(list is None):
-                    list = [SearchString]
+                    list = [SearchString.lower()]
                     cohort_dict.update({filecount_str:list})
                 else:
                     list = cohort_dict.get(filecount_str)
-                    list.append(SearchString)
+                    list.append(SearchString.lower())
                     cohort_dict.update({filecount_str: list})
             else:
                 placeholder = "this is just a place holder for now"
