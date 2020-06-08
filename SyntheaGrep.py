@@ -14,7 +14,7 @@ from jsonpath_ng.ext import parse
 
 #TODO  Add the final numbers calculator
 
-DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\"
+DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\fhir\\"
 # ParseExp= "$..resource[?(@.resourceType == 'Encounter')]..coding..display"
 SearchString = "Rheumatoid"
 #cohort_info = []
@@ -34,7 +34,10 @@ def data_run():
             # print("Is it File?" + str(os.path.isfile(DataDir + file)))
             goodfile = (DataDir + file)
             opfile = open(goodfile, mode='r')
-            flstring = opfile.read()
+            try:
+                flstring = opfile.read()
+            except:-
+                print("fail to read " + goodfile)
             outstr = ""
             if (flstring.lower().find(SearchString.lower()) != -1):
                 list = cohort_dict.get(filecount_str)
@@ -84,6 +87,7 @@ def save_file():
 
 def pick_dir():
     DataDir = tk.filedialog.askdirectory()
+    print(DataDir)
 
 def count_cohort():
     txt_edit.delete('1.0', tk.END)

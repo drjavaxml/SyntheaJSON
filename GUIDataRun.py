@@ -10,7 +10,7 @@ import FHIR_util as fu
 from jsonpath_ng import jsonpath
 from jsonpath_ng.ext import parse
 
-DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\"
+DataDir = "C:\\Users\\phend\\PycharmProjects\\SyntheaJSON\\fhir\\"
 Code1 = '69896004'
 Name1 = "RA"
 # ParseExp= "$..resource[?(@.resourceType == 'Encounter')]..coding..display"
@@ -28,7 +28,10 @@ def myfunc():
             # print("Is it File?" + str(os.path.isfile(DataDir + file)))
             goodfile = (DataDir + file)
             opfile = open(goodfile, mode='r')
-            flstring = opfile.read()
+            try:
+                flstring = opfile.read()
+            except:
+                print("could not read file " + goodfile)
 
             time.sleep(0.25)  # crashes without this
 
@@ -82,6 +85,8 @@ def save_file():
 
 def pick_dir():
     DataDir = tk.filedialog.askdirectory()
+    DataDir += "/"
+    print( "DataDir is " + DataDir )
 
 
 
